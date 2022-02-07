@@ -1,4 +1,5 @@
 // const res = require("express/lib/response");
+const product = require("../models/product");
 const Product = require("../models/product");
 
 // Create New Product => /api/v1/admin/product/new
@@ -63,3 +64,23 @@ exports.updateProduct = async (req, res, next) => {
     product
   })
 };
+
+// Delete Product => /api/v1/admin/product/:id
+
+exports.deleteProduct = async (req, res, next) => {
+  let product = await Product.findById(req.params.id);
+
+  if (!product) {
+    return res.status(404).json({
+      success: false,
+      message: "Product not found",
+    });
+  }
+ 
+  product = await Product.findByIdAndDelete(req.params.id)
+
+  res.status(200).json({
+    success: true,
+    message: `The product has been deleted with the id: ${req.params.id}`,
+  })
+}
