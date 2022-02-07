@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Sandisk Ultra",
+        "price": "10.00",
+        "description":"veerryyyyyyyy well done goooood",
+        "rating": 4.5,
+        "images": [{
+            "public_id": "product/testtest",
+            "url": "https://st.depositphotos.com/1000128/3460/i/950/depositphotos_34607995-stock-photo-sim-card.jpg"
+        }],
+        "category": "Electronics",
+        "seller": "success",
+        "stock": 50, 
+        "numOfReviews": 32,
+        "reviews": []
+    }
+]
