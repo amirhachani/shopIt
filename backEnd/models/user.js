@@ -45,6 +45,12 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpire: Date,
 })
 
+
+// compare user password 
+userSchema.methods.comparePassword = async function (enteredPassword){
+    return await bcrypt.compare(enteredPassword, this.password)
+}
+
 // Return JSON WEB TOKEN  
 userSchema.methods.getJwtToken = function (){
     return jwt.sign({ id: this._id}, process.env.JWT_SECRET, {

@@ -26,3 +26,37 @@ exports.registerUser = catchAsyncErrors( async (req, res, next) => {
         token
     })
 }) 
+
+// login user => /api/v1/lgin]
+
+exports.loginUser = catchAsyncErrors( async (req, res, next) => {
+    const { email, password } = req.body;
+
+    // checks if email and password is entered by user 
+
+    if(!email || !password){
+        return next(new ErrorHandler('Please Enter Email or Password', 400));
+    }
+
+    // Finding user in database 
+
+    const user = await User.findOne({ email }).select('+password')
+
+    if(!user) {
+        return next(new ErrorHandler('Invalid Email or Password', 401))
+    }
+
+    // Checks if password is correct or not 
+    const isPasswordMatched = await user.comparePassword(password)
+
+    if(!isPasswordMatched){
+        return next(new ErrorHandler('Invalid Password please enter correct password or email', 401))
+    }
+
+    const token = user.getJwtToken();
+
+    res.status(200).json({ 
+        success: true,
+        token
+    })
+})
