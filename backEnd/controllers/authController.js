@@ -14,10 +14,10 @@ exports.registerUser = catchAsyncErrors( async (req, res, next) => {
         name,
         email,
         password,
-        avatar : {
-            public_id: '',
-            url: ''
-        }
+        // avatar : {
+        //     public_id: '',
+        //     url: ''
+        // }
     })
 
     sendToken(user, 200, res)
